@@ -11,25 +11,20 @@ import com.simpleapp.constants.Constants;
 
 public class MyApplication extends Application {
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		initImageLoader(getApplicationContext());
-		Constants.imageLoader = ImageLoader.getInstance();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initImageLoader(getApplicationContext());
+        Constants.imageLoader = ImageLoader.getInstance();
 	}
-	public void initImageLoader(Context context) {
-		// This configuration tuning is custom. You can tune every option, you may tune some of them,
-		// or you can create default configuration by
-		//  ImageLoaderConfiguration.createDefault(this);
-		// method.
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+    public void initImageLoader(Context context) {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
 				.threadPriority(Thread.NORM_PRIORITY)
 				.denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				.writeDebugLogs() // Remove for release app
+				.writeDebugLogs()
 				.build();
-		// Initialize ImageLoader with configuration.
-		ImageLoader.getInstance().init(config);
-	}
+        ImageLoader.getInstance().init(config);
+    }
 }
